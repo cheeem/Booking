@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <!-- <link rel="icon" type="image/svg+xml" href="/vite.svg" /> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Booking</title>
+        <script src="https://unpkg.com/htmx.org@2.0.2"></script>
+        <!-- global styles -->
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;500;600;800;900');
+
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+
+                font-family: 'Montserrat', sans-serif;
+                /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+                color: var(--dark1);
+            }
+
+            :root {
+                --light1: white;
+                --light2: hsl(0, 0%, 97%);
+
+                --dark1: hsl(252, 10%, 20%);
+                --dark2: hsl(252, 10%, 25%);
+
+                --highlight1: #6D6DFF;
+                --highlight2: #0083FF;
+
+                --invalid: hsla(0, 100%, 80%, 0.2);
+                --valid: hsla(120, 100%, 80%, 0.2);
+                --warning: hsla(60, 100%, 80%, 0.2);
+
+                /* --link: #0060df; */
+
+                /* --border1: 0.2em solid var(--light2); */
+                
+                --side-padding: 10vw;
+
+                --nav-height: 5em;
+
+                --field-active-top: -0.75em;
+                --field-padding-y: 1em;
+                --field-padding-x: 3em;
+            }
+
+            html {
+                overflow-y: scroll;
+
+                height: 100%;
+
+                scroll-behavior: smooth;
+
+                font-size: max(0.7rem, 1vh, 0.85vw);
+            }
+
+            main {
+                position: relative;
+                top: var(--nav-height);
+            }
+
+            :focus {
+                outline: none;
+            }
+
+            a {
+                text-decoration: none;
+            }
+
+            li {
+                list-style-type: none;
+            }
+
+            h1 {
+                font-size: 3em;
+            }
+
+            h2 {
+                font-size: 2.35em;
+            }
+
+            h3 {
+                font-size: 1.5em;
+            }
+
+            h5 {
+                font-size: 1em;
+                font-weight: 600;
+            }
+
+            /* .loading, .loading * {
+                cursor: wait !important;
+            }
+
+            .loading h1, 
+            .loading h2, 
+            .loading h3, 
+            .loading h5,
+            .loading p {
+                width: fit-content;
+
+                background-color: var(--light2);
+
+                color: var(--light2);
+
+                user-select: none;
+            } */
+
+            button {
+                background-color: transparent;
+
+                font-size: 1em;
+                
+                border: none;
+                outline: none;
+
+                cursor: pointer;
+            }
+        </style>
+        <!-- nav styles -->
+        <style>
+            nav {
+                --nav-txt-color: var(--dark1);
+                --nav-bkg-color: var(--light1);
+
+                z-index: 5;
+                position: fixed;
+
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                height: var(--nav-height);
+                width: 100%;
+
+                padding: 0 var(--side-padding);
+
+                background-color: var(--nav-bkg-color);
+            }
+
+            nav h5 {
+                font-size: 1.3em;
+                font-weight: 800;
+            }
+
+            nav h5 span {
+                color: var(--highlight2);
+            }
+
+            nav ul {
+                display: flex;
+                gap: 3em;
+            }
+
+            nav li {
+                position: relative;
+            }
+
+            nav ul a {
+                font-weight: 600;
+            }
+
+            nav ul a::after {
+                position: absolute;
+                left: 0;
+                bottom: -0.6em;
+
+                width: 0;
+                height: 0.1em;
+
+                background-color: var(--nav-txt-color);
+
+                content: "";
+
+                border-radius: 1em;
+
+                transition: width 0.2s ease;
+            }
+
+            nav ul a:hover::after {
+                width: 100%;
+            }
+
+            nav ul a:focus::after {
+                width: 100%;
+            }
+
+            nav .active::after {
+                width: 100%;
+            }
+        </style>
+        <!-- page styles -->
+        {% block style %}{% endblock %}
+    </head>
+    <body>
+        <nav>
+            <a href="http://{{ crate::ADDR }}" class="logo"><h5>Booking<span>Site</span></h5></a>
+            <ul>
+                {% for tab in crate::NAV_TABS %}
+                    <li>
+                        {% if tab.path == path %}
+                            <a class="active" href="http://{{ crate::ADDR }}{{ tab.path }}"> {{ tab.display }} </a>
+                        {% else %}
+                            <a href="http://{{ crate::ADDR }}{{ tab.path }}">{{ tab.display }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+        {% block main %}{% endblock %}
+  </body>
+</html>

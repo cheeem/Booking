@@ -1,0 +1,40 @@
+<div class="month">
+    <div class="header">
+        <div>
+            <h1>{{ month }} {{ year }}</h1>
+        </div>
+        <div class="controls">
+            <button 
+                hx-get="/calendar/month/{{ previous_month_year }}/{{ previous_month }}/" 
+                hx-target=".month" 
+                hx-swap="outerHTML" 
+                hx-push-url="/calendar/{{ previous_month_year }}/{{ previous_month }}/"
+            >
+                Previous
+            </button>
+            <button 
+                hx-get="/calendar/month/{{ next_month_year }}/{{ next_month }}/" 
+                hx-target=".month" 
+                hx-swap="outerHTML" 
+                hx-push-url="/calendar/{{ previous_month_year }}/{{ previous_month }}/"
+            >
+                Next
+            </button>
+        </div>
+    </div>
+    <ul>
+        <li class="weekday">Sunday</li>
+        <li class="weekday">Monday</li>
+        <li class="weekday">Tuesday</li>
+        <li class="weekday">Wednesday</li>
+        <li class="weekday">Thursday</li>
+        <li class="weekday">Friday</li>
+        <li class="weekday">Saturday</li>
+        <li class="day" style="grid-column-start: {{ first_day_of_week }};">1</li>
+        {% for day in 2..=last_day %}
+            <li class="day">
+                {{ day }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>

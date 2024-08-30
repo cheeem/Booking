@@ -1,0 +1,20 @@
+[package]
+name = "server"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+dotenv = "0.15.0"
+axum = { version = "0.7.2", features=["macros", "multipart"] }
+axum-extra = { version = "0.9.1", features = ["cookie"] }
+tokio = { version = "1.32.0", features = ["full"] }
+askama = "0.12.1"
+chrono = "0.4.38"
+sqlx = { version = "0.8.1", features = ["runtime-tokio", "mysql", "chrono"] }
+serde = { version = "1.0.209", features = ["derive"] }
+reqwest = "0.12.7"
+# rand_core = { version = "0.6.4", features = ["std"] }
+# jsonwebtoken = "9.2.0"
+# argon2 = "0.5.0"

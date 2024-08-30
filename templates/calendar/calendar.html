@@ -1,0 +1,53 @@
+{% extends "page.html" %}
+
+{% block style %}
+    <style>
+        #calendar {
+            padding: 5em var(--side-padding);
+        }
+
+        #calendar .month {
+            display: grid;
+            gap: 5em;
+        }
+
+        #calendar .month .header {
+            display: grid;
+            gap: 1em;
+        }
+
+        #calendar .month button {
+            padding: 1em;
+
+            background-color: var(--dark1);
+
+            font-weight: 600;
+            color: var(--light1);
+        }
+
+        #calendar .month ul {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.2em;
+        }
+
+        #calendar .weekday {
+            text-align: center;
+            font-weight: 600;
+        }
+
+        #calendar .month .day {
+            padding: 1em;
+
+            background-color: var(--light2);
+
+            text-align: center;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+    <main id="calendar">
+        {% include "month.html" %}
+    </main>
+{% endblock %}
